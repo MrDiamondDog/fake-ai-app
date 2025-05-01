@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000007;
+  --color-foreground: #050020;
+  --color-border: #290074;
+
+  --radius-lg: 16px;
+}
+
+body {
+  background: var(--color-background);
+  color: white;
+  font-family: "Lexend";
+}
