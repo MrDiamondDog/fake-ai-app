@@ -3,16 +3,20 @@
 import Button from "@/components/Button";
 import ChatArea from "@/components/ChatArea";
 import ChatTag from "@/components/ChatTag";
+import NotAuthenticated from "@/components/NotAuthenticated";
 import { Message } from "@/util/message";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowUp } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 export default function ChatPage() {
+    const { data: session } = useSession()
+
     const [chatTag, setChatTag] = useState("answer");
-
     const [input, setInput] = useState("");
-
     const [messages, setMessages] = useState<Message[]>([]);
+
+    if (!session?.user) return <NotAuthenticated />
 
     async function sendChat() {
         setMessages([...messages, {
@@ -27,7 +31,7 @@ export default function ChatPage() {
     return (
         <main className="bg-background p-5 h-screen">
             <div className="flex flex-col gap-5 h-full justify-between items-center">
-                <div className="w-2/3 overflow-scroll">
+                <div className="w-1/2 overflow-scroll">
                     <ChatArea messages={messages} />
                 </div>
                 <div className="w-1/2 bg-foreground border border-border rounded-lg flex flex-col p-5">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
 
 const lexend = Lexend({
   variable: "--font-lexend",
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lexend.variable} antialiased h-screen`}
+        className={`${lexend.variable} antialiased h-screen bg-background`}
       >
-        {children}
+        <SessionProvider>
+          {children}
+        </SessionProvider>
       </body>
     </html>
   );
